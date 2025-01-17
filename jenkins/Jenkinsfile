@@ -1,0 +1,41 @@
+pipeline {
+    agent any
+
+    parameters {
+        string(name: 'TAG', defaultValue: "AddPlace", description: 'Enter the tag you want to use for execution')
+    }
+
+    stages {
+        stage('GIT Checkout') {
+            steps {
+                echo "*********Git checkout code*********"
+                git branch: 'develop',
+                        credentialsId: 'GitHub_643',
+                        url: 'https://github.com/vdinuu/BDD_APIAutomationFramework.git'
+            }
+        }
+        stage('Execute test cases') {
+            steps {
+                echo "*********Executing test cases**********"
+                bat """
+                    mvn clean test "-Dcucumber.filter.tags=@${params.TAG}"
+                    """
+            }
+        }
+        stage('Generate HTML Report') {
+            steps {
+                echo "*********Generating HTML report*********"
+                bat 'allure generate target/allure-results --clean -o allure-report'
+            }
+        }
+        //Make sure to install HTML publisher plugin before using this stage
+        stage('Publish HTML report') {
+            steps {
+                allure([
+                        results: [[path: 'target/allure-results']],   // Path to the directory with allure-results
+                        report: 'allure-report'                 // Path to the directory with generated allure report
+                ])
+            }
+        }
+    }
+}
