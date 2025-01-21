@@ -2,7 +2,8 @@ pipeline {
     agent any
 
     parameters {
-        string(name: 'TAG', defaultValue: "AddPlace", description: 'Enter the tag you want to use for execution')
+        choice(name: 'PROFILE', choices: ['smoke', 'regression'], defaultValue: "smoke", description: "Select the maven profile to be executed")
+//        string(name: 'TAG', defaultValue: "AddPlace", description: 'Enter the tag you want to use for execution')
     }
 
     stages {
@@ -11,14 +12,14 @@ pipeline {
                 echo "*********Git checkout code*********"
                 git branch: 'develop',
                         credentialsId: 'GitHub_643',
-                        url: 'https://github.com/vdinuu/BDD_APIAutomationFramework.git'
+                        url: 'https://github.com/vdinuu/APIAutomationFrameworkJunit.git'
             }
         }
         stage('Execute test cases') {
             steps {
                 echo "*********Executing test cases**********"
                 bat """
-                    mvn clean test "-Dcucumber.filter.tags=@${params.TAG}"
+                    mvn clean test "-P${params.PROFILE}"
                     """
             }
         }
