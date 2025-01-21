@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     parameters {
-        choice(name: 'PROFILE', choices: ['smoke', 'regression'], defaultValue: "smoke", description: "Select the maven profile to be executed")
+        choice(name: 'PROFILE', choices: ['smoke', 'regression'], description: "Select the maven profile to be executed")
 //        string(name: 'TAG', defaultValue: "AddPlace", description: 'Enter the tag you want to use for execution')
     }
 
