@@ -1,5 +1,6 @@
 package utils;
 
+import io.qameta.allure.restassured.AllureRestAssured;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.filter.log.RequestLoggingFilter;
 import io.restassured.filter.log.ResponseLoggingFilter;
@@ -30,6 +31,7 @@ public class RestUtils {
                     .addQueryParam("key", "qaclick123")
                     .addFilter(RequestLoggingFilter.logRequestTo(log))
                     .addFilter(ResponseLoggingFilter.logResponseTo(log))
+                    .addFilter(new AllureRestAssured())
                     .setContentType(ContentType.JSON)
                     .build();
         }
