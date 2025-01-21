@@ -7,12 +7,13 @@ import io.restassured.http.ContentType;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
+import place_api.Endpoints;
 
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.PrintStream;
 
-import static step_definitions.Hooks.properties;
+import static tests.BaseTest.properties;
 
 public class RestUtils {
     public static RequestSpecification requestSpec;
@@ -38,5 +39,16 @@ public class RestUtils {
     public String getValueFromResponse(Response response, String jsonPath){
         JsonPath jsPath = new JsonPath(response.asString());
         return jsPath.get(jsonPath);
+    }
+    public Response performPostCall(RequestSpecification requestSpecification, Endpoints endpoints){
+        return requestSpecification
+                .when()
+                .post(endpoints.getEndpoint());
+    }
+
+    public Response performGetCall(RequestSpecification requestSpecification, Endpoints endpoint){
+        return requestSpecification
+                .when()
+                .get(endpoint.getEndpoint());
     }
 }

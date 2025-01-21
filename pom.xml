@@ -21,20 +21,21 @@
     <lombok.version>1.18.36</lombok.version>
     <faker.version>2.4.2</faker.version>
     <allure.version>2.29.1</allure.version>
+    <junit.version>5.11.4</junit.version>
   </properties>
 
   <!-- Add allure-bom to dependency management to ensure correct versions of all the dependencies are used -->
-  <dependencyManagement>
-    <dependencies>
-      <dependency>
-        <groupId>io.qameta.allure</groupId>
-        <artifactId>allure-bom</artifactId>
-        <version>${allure.version}</version>
-        <type>pom</type>
-        <scope>import</scope>
-      </dependency>
-    </dependencies>
-  </dependencyManagement>
+<!--  <dependencyManagement>-->
+<!--    <dependencies>-->
+<!--      <dependency>-->
+<!--        <groupId>io.qameta.allure</groupId>-->
+<!--        <artifactId>allure-bom</artifactId>-->
+<!--        <version>${allure.version}</version>-->
+<!--        <type>pom</type>-->
+<!--        <scope>import</scope>-->
+<!--      </dependency>-->
+<!--    </dependencies>-->
+<!--  </dependencyManagement>-->
   <dependencies>
     <dependency>
       <groupId>io.rest-assured</groupId>
@@ -68,15 +69,22 @@
       <artifactId>datafaker</artifactId>
       <version>${faker.version}</version>
     </dependency>
+<!--    <dependency>-->
+<!--      <groupId>io.qameta.allure</groupId>-->
+<!--      <artifactId>allure-cucumber7-jvm</artifactId>-->
+<!--      <scope>test</scope>-->
+<!--    </dependency>-->
+<!--    <dependency>-->
+<!--      <groupId>io.qameta.allure</groupId>-->
+<!--      <artifactId>allure-junit-platform</artifactId>-->
+<!--      <scope>test</scope>-->
+<!--    </dependency>-->
     <dependency>
-      <groupId>io.qameta.allure</groupId>
-      <artifactId>allure-cucumber7-jvm</artifactId>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter-api</artifactId>
+      <version>${junit.version}</version>
       <scope>test</scope>
     </dependency>
-    <dependency>
-      <groupId>io.qameta.allure</groupId>
-      <artifactId>allure-junit-platform</artifactId>
-      <scope>test</scope>
-    </dependency>
+
   </dependencies>
 </project>

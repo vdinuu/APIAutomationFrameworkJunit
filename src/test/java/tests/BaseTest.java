@@ -1,13 +1,13 @@
-package step_definitions;
+package tests;
 
-import io.cucumber.java.BeforeAll;
+import org.junit.jupiter.api.BeforeAll;
 
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Properties;
 
-public class Hooks {
+public class BaseTest {
     public static Properties properties;
     public static HashMap<String, Object> dataMap;
 
